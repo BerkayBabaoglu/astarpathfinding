@@ -5,7 +5,7 @@ using UnityEngine;
 public class Grid :MonoBehaviour
 {
     public LayerMask unwalkableMask;
-    public Vector3 gridWorldSize;
+    public Vector2 gridWorldSize;
     public float nodeRadius;
     Node[,] grid;
 
@@ -15,7 +15,7 @@ public class Grid :MonoBehaviour
     private void Start()
     {
         nodeDiameter = nodeRadius * 2;
-        gridSizeX = Mathf.RoundToInt(gridWorldSize.x/nodeDiameter);
+        gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
         gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
         CreateGrid();
     }
@@ -30,7 +30,7 @@ public class Grid :MonoBehaviour
             for(int y=0; y< gridSizeY; y++)
             {
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
-                bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius));
+                bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius,unwalkableMask));
                 grid[x, y] = new Node(walkable, worldPoint);
             }
         }
@@ -42,10 +42,10 @@ public class Grid :MonoBehaviour
 
         if(grid!= null)
         {
-            foreach(Node node in grid)
+            foreach(Node n in grid)
             {
-                Gizmos.color = (node.walkable) ? Color.white : Color.red;
-                Gizmos.DrawCube(node.worldPosition, Vector3.one * (nodeDiameter-.1f));
+                Gizmos.color = (n.walkable) ? Color.blue : Color.yellow;
+                Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter-.1f));
             }
         }
     }
