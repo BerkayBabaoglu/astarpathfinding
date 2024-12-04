@@ -60,6 +60,8 @@ public class Grid :MonoBehaviour
         return neighbours;
     }
 
+   
+
     public Node NodeFromWorldPoint(Vector3 worldPosition)
     {
         float percentX = (worldPosition.x + gridWorldSize.x / 2) / gridWorldSize.x;
@@ -72,6 +74,8 @@ public class Grid :MonoBehaviour
         return grid[x, y];
     }
 
+    public List<Node> path;
+
     void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, 1, gridWorldSize.y));
@@ -81,6 +85,11 @@ public class Grid :MonoBehaviour
             foreach(Node n in grid)
             {
                 Gizmos.color = (n.walkable) ? Color.blue : Color.yellow;
+                if(path != null)
+                {
+                    if (path.Contains(n))
+                        Gizmos.color = Color.black;
+                }
                 Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter-.1f));
             }
         }
