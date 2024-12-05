@@ -45,6 +45,11 @@ public class Heap<T> where T : IHeapItem<T>
         }
     }
 
+    public bool Contains(T item)
+    {
+        return Equals(items[item.HeapIndex], item);
+    }
+
     void SortDown(T item)
     {
         while (true)
