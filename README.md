@@ -1,4 +1,4 @@
-# A* Pathfinding Algoritması
+# A* Pathfinding Algorithm
 
 This project is an application that finds the shortest path between two points using the A (A-Star) Pathfinding* algorithm. 
 The A* algorithm is an efficient pathfinding algorithm used in various fields such as mapping, game development, and robotics.
